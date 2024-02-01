@@ -18,22 +18,22 @@ namespace CountriesService
             _apirequester = apirequester;
         }
 
-        public CountryModel GetCountryInfoByCode(string countryCode)
+        public async Task<CountryModel> GetCountryInfoByCodeAsync(string countryCode)
         {
             throw new NotImplementedException();
         }
 
-        public CountryModel GetCountryInfoByName(string countryName)
+        public async Task<CountryModel> GetCountryInfoByNameAsync(string countryName)
         {
             throw new NotImplementedException();
         }
 
-        public CountryModel GetCountryInfoByCapital(string capitalName)
+        public async Task<CountryModel> GetCountryInfoByCapitalAsync(string capitalName)
         {
             throw new NotImplementedException();
         }
 
-        private static CountryModel ConvertJsonIntoCountryModel(string json)
+        private static async Task<CountryModel> ConvertJsonIntoCountryModelAsync(string json)
         {
             throw new NotImplementedException();
         }
