@@ -33,7 +33,7 @@ namespace CountriesService
             throw new NotImplementedException();
         }
 
-        private static CountryModel ConvertJsonIntoCountryModel(JsonDocument json)
+        private static CountryModel ConvertJsonIntoCountryModel(string json)
         {
             throw new NotImplementedException();
         }
