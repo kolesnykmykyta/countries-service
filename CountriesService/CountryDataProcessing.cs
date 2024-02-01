@@ -35,7 +35,33 @@ namespace CountriesService
 
         private static async Task<CountryModel> ConvertJsonIntoCountryModelAsync(string json)
         {
-            throw new NotImplementedException();
+            try
+            {
+                JsonDocument document;
+                using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+                {
+                    document = await JsonDocument.ParseAsync(stream);
+                }
+
+                JsonElement rootElement = document.RootElement;
+
+                CountryModel output = new CountryModel()
+                {
+                    Name = rootElement.EnumerateArray().FirstOrDefault().GetProperty("name").GetProperty("common").GetString(),
+                    Currency = new CurrencyModel()
+                    {
+                        Code = rootElement.EnumerateArray().FirstOrDefault().GetProperty("currencies").EnumerateObject().FirstOrDefault().Name,
+                        Name = rootElement.EnumerateArray().FirstOrDefault().GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("name").GetString(),
+                        Symbol = rootElement.EnumerateArray().FirstOrDefault().GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("symbol").GetString(),
+                    }
+                };
+
+                return output;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
