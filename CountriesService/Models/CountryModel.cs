@@ -10,7 +10,7 @@ namespace CountriesService.Models
     public class CountryModel
     {
         public string? Name { get; set; }
-        //public CurrencyModel? Currency { get; set; }
+        public CurrencyModel? Currency { get; set; }
         public string? Capital { get; set; }
         public string? Region { get; set; }
         public List<string>? Languages { get; set; }
