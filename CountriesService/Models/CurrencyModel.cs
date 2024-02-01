@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CountriesService.Models
 {
     /// <summary>
-    /// Defines class to save the most common information about the currency.
+    /// Contains the most common information about the currency.
     /// </summary>
     public class CurrencyModel
     {

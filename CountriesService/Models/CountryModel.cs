@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CountriesService.Models
 {
     /// <summary>
-    /// Defines class to save the most common information about the country instance.
+    /// Contains the most common information about the country instance.
     /// </summary>
     public class CountryModel
     {
