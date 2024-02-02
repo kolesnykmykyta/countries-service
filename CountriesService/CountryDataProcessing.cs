@@ -27,7 +27,7 @@ namespace CountriesService
                 {
                     throw new ArgumentException("CountryCode is null, empty or whitespace.");
                 }
-                string request = $"{targetedApi}alpha/{countryCode}?fields=name,capital,area,population,flags,currencies";
+                string request = $"{targetedApi}alpha/{countryCode}?fields=name,capital,area,population,flags,currencies,region";
 
                 string jsonData = await _apirequester.GetJsonFromApiAsync(request);
 
@@ -75,7 +75,12 @@ namespace CountriesService
                         Code = rootElement.GetProperty("currencies").EnumerateObject().FirstOrDefault().Name,
                         Name = rootElement.GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("name").GetString(),
                         Symbol = rootElement.GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("symbol").GetString(),
-                    }
+                    },
+                    Capital = rootElement.GetProperty("capital").EnumerateArray().FirstOrDefault().GetString(),
+                    Region = rootElement.GetProperty("region").GetString(),
+                    Area = rootElement.GetProperty("area").GetDouble(),
+                    Population = rootElement.GetProperty("population").GetInt32(),
+                    FlagURL = rootElement.GetProperty("flags").GetProperty("png").GetString(),
                 };
 
                 return output;
