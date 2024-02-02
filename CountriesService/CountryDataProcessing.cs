@@ -69,12 +69,12 @@ namespace CountriesService
 
                 CountryModel output = new CountryModel()
                 {
-                    Name = rootElement.EnumerateArray().FirstOrDefault().GetProperty("name").GetProperty("common").GetString(),
+                    Name = rootElement.GetProperty("name").GetProperty("common").GetString(),
                     Currency = new CurrencyModel()
                     {
-                        Code = rootElement.EnumerateArray().FirstOrDefault().GetProperty("currencies").EnumerateObject().FirstOrDefault().Name,
-                        Name = rootElement.EnumerateArray().FirstOrDefault().GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("name").GetString(),
-                        Symbol = rootElement.EnumerateArray().FirstOrDefault().GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("symbol").GetString(),
+                        Code = rootElement.GetProperty("currencies").EnumerateObject().FirstOrDefault().Name,
+                        Name = rootElement.GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("name").GetString(),
+                        Symbol = rootElement.GetProperty("currencies").EnumerateObject().FirstOrDefault().Value.GetProperty("symbol").GetString(),
                     }
                 };
 
