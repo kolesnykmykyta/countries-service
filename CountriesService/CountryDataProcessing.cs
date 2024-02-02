@@ -12,6 +12,7 @@ namespace CountriesService
     public class CountryDataProcessing
     {
         private readonly IApiRequest _apirequester;
+        const string targetedApi = "https://restcountries.com/v3.1/";
 
         public CountryDataProcessing(IApiRequest apirequester)
         {
@@ -20,7 +21,28 @@ namespace CountriesService
 
         public async Task<CountryModel> GetCountryInfoByCodeAsync(string countryCode)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(countryCode))
+                {
+                    throw new ArgumentException("CountryCode is null, empty or whitespace.");
+                }
+                string request = $"{targetedApi}code/{countryCode}?fields=name,capital,area,population,flags";
+
+                string jsonData = await _apirequester.GetJsonFromApiAsync(request);
+
+                CountryModel output = await ConvertJsonIntoCountryModelAsync(jsonData);
+
+                return output;
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new HttpRequestException(ex.Message);
+            }
         }
 
         public async Task<CountryModel> GetCountryInfoByNameAsync(string countryName)
