@@ -27,7 +27,7 @@ namespace CountriesService
                 {
                     throw new ArgumentException("CountryCode is null, empty or whitespace.");
                 }
-                string request = $"{targetedApi}code/{countryCode}?fields=name,capital,area,population,flags";
+                string request = $"{targetedApi}alpha/{countryCode}?fields=name,capital,area,population,flags";
 
                 string jsonData = await _apirequester.GetJsonFromApiAsync(request);
 
