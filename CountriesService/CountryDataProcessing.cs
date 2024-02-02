@@ -58,9 +58,9 @@ namespace CountriesService
 
                 return output;
             }
-            catch (Exception)
+            catch (JsonException ex)
             {
-                throw;
+                throw new ArgumentException($"Exception when parsing JSON into model: {ex.Message}");
             }
         }
     }
