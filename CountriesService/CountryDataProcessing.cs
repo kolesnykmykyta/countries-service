@@ -21,25 +21,20 @@ namespace CountriesService
 
         public async Task<CountryModel> GetCountryInfoByCodeAsync(string? countryCode)
         {
+            if (string.IsNullOrWhiteSpace(countryCode))
+            {
+                throw new ArgumentException("CountryCode is null, empty or whitespace.");
+            }
+
             try
             {
-                if (string.IsNullOrWhiteSpace(countryCode))
-                {
-                    throw new ArgumentException("CountryCode is null, empty or whitespace.");
-                }
                 string request = $"{targetedApi}alpha/{countryCode}?fields=name,capital,area,population,flags,currencies,region";
-
                 string jsonData = await _apirequester.GetJsonFromApiAsync(request);
-
                 CountryModel output = await ConvertJsonIntoCountryModelAsync(jsonData);
 
                 return output;
             }
-            catch (ArgumentException ex)
-            {
-                throw new ArgumentException(ex.Message);
-            }
-            catch (JsonException ex)
+            catch (Exception ex) when (ex is ArgumentException || ex is JsonException)
             {
                 throw new ArgumentException(ex.Message);
             }
