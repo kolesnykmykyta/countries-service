@@ -19,7 +19,7 @@ namespace CountriesService
             _apirequester = apirequester;
         }
 
-        public async Task<CountryModel> GetCountryInfoByCodeAsync(string countryCode)
+        public async Task<CountryModel> GetCountryInfoByCodeAsync(string? countryCode)
         {
             try
             {
@@ -39,9 +39,9 @@ namespace CountriesService
             {
                 throw new ArgumentException(ex.Message);
             }
-            catch (HttpRequestException ex)
+            catch (JsonException ex)
             {
-                throw new HttpRequestException(ex.Message);
+                throw new ArgumentException(ex.Message);
             }
         }
 
@@ -85,9 +85,9 @@ namespace CountriesService
 
                 return output;
             }
-            catch (JsonException ex)
+            catch (Exception ex)
             {
-                throw new ArgumentException($"Exception when parsing JSON into model: {ex.Message}");
+                throw new JsonException($"Exception when parsing JSON into model: {ex.Message}");
             }
         }
     }
