@@ -33,11 +33,6 @@ namespace CountriesService.Models
         public string? Region { get; set; }
 
         /// <summary>
-        /// List of the official languages in the country.
-        /// </summary>
-        public List<string>? Languages { get; set; }
-
-        /// <summary>
         /// Area of the country.
         /// </summary>
         public double Area { get; set; }
