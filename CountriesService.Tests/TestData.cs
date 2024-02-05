@@ -9,7 +9,7 @@ namespace CountriesService.Tests
 {
     public static class TestData
     {
-        public static readonly string IncorrectRequest = "{\"status\":404,\"message\":\"Not Found\"}";
+        public static readonly string InvalidRequest = "{\"status\":404,\"message\":\"Not Found\"}";
 
         public static Dictionary<string, string> MockJsonForCountryCode = new Dictionary<string, string>
         {
