@@ -31,7 +31,7 @@ namespace CountriesService.Tests
 
             CountryModel actual = await processor.GetCountryInfoByCodeAsync(code);
             
-            Assert.Equal(expected.Name, actual.Name);
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
