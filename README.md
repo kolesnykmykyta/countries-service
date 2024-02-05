@@ -1,8 +1,6 @@
 # Countries Service
-*The project is unfinished. Branch "master" contains a fully developed unit of functionality, and branch "data-processing" contains the most recent code.*
 
 ## Description
-
 This repository contains the simple class library that provides access to the information about the countries using [REST countries API](https://restcountries.com/) and unit tests for this library.
 
 ## Puprose of the project
