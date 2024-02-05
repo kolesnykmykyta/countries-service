@@ -25,5 +25,19 @@ namespace CountriesService.Models
         /// Symbol of the currency.
         /// </summary>
         public string? Symbol { get; set; }
+
+        /// <summary>
+        /// Method to compare CurrencyModel to any object.
+        /// </summary>
+        /// <param name="obj">Object to compare with.</param>
+        /// <returns>True if objects are equal, false if they are not equal.</returns>
+        public override bool Equals(object? obj)
+        {
+            CurrencyModel? other = obj as CurrencyModel;
+            return other is not null &&
+                other.Code == this.Code &&
+                other.Name == this.Name &&
+                other.Symbol == this.Symbol;
+        }
     }
 }
