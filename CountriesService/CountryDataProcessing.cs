@@ -34,7 +34,7 @@ namespace CountriesService
 
                 return output;
             }
-            catch (Exception ex) when (ex is ArgumentException || ex is JsonException)
+            catch (JsonException ex)
             {
                 throw new ArgumentException(ex.Message);
             }
