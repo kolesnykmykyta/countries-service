@@ -60,7 +60,16 @@ namespace CountriesService
                     document = await JsonDocument.ParseAsync(stream);
                 }
 
-                JsonElement rootElement = document.RootElement;
+                JsonElement rootElement;
+
+                try
+                {
+                    rootElement = document.RootElement.EnumerateArray().FirstOrDefault();
+                }
+                catch
+                {
+                    rootElement = document.RootElement;
+                }
 
                 CountryModel output = new CountryModel()
                 {
