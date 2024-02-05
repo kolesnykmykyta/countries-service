@@ -129,7 +129,7 @@ namespace CountriesService.Tests
             },
         };
 
-        public static Dictionary<string, string> MockJssonForCountryCapital = new Dictionary<string, string>
+        public static Dictionary<string, string> MockJsonForCountryCapital = new Dictionary<string, string>
         {
             {"tallin", "[{\"flags\":{\"png\":\"https://flagcdn.com/w320/ee.png\",\"svg\":\"https://flagcdn.com/ee.svg\",\"alt\":\"The flag of Estonia is composed of three equal horizontal bands of blue, black and white.\"},\"name\":{\"common\":\"Estonia\",\"official\":\"Republic of Estonia\",\"nativeName\":{\"est\":{\"official\":\"Eesti Vabariik\",\"common\":\"Eesti\"}}},\"currencies\":{\"EUR\":{\"name\":\"Euro\",\"symbol\":\"€\"}},\"capital\":[\"Tallinn\"],\"region\":\"Europe\",\"area\":45227.0,\"population\":1331057}]" },
             {"lond", "[{\"flags\":{\"png\":\"https://flagcdn.com/w320/gb.png\",\"svg\":\"https://flagcdn.com/gb.svg\",\"alt\":\"The flag of the United Kingdom — the Union Jack — has a blue field. It features the white-edged red cross of Saint George superimposed on the diagonal red cross of Saint Patrick which is superimposed on the diagonal white cross of Saint Andrew.\"},\"name\":{\"common\":\"United Kingdom\",\"official\":\"United Kingdom of Great Britain and Northern Ireland\",\"nativeName\":{\"eng\":{\"official\":\"United Kingdom of Great Britain and Northern Ireland\",\"common\":\"United Kingdom\"}}},\"currencies\":{\"GBP\":{\"name\":\"British pound\",\"symbol\":\"£\"}},\"capital\":[\"London\"],\"region\":\"Europe\",\"area\":242900.0,\"population\":67215293}]" },
@@ -142,7 +142,7 @@ namespace CountriesService.Tests
                 {
                     Name = "Estonia",
                     FlagURL = "https://flagcdn.com/w320/ee.png",
-                    Capital = "Tallin",
+                    Capital = "Tallinn",
                     Currency = new CurrencyModel()
                     {
                         Name = "Euro",

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Xunit;
 
 namespace CountriesService.Tests
@@ -77,7 +78,7 @@ namespace CountriesService.Tests
         [InlineData("")]
         [InlineData("    ")]
         [InlineData(null)]
-        public async Task GetCountryInfoByNameAsync_NullEmptyOrWhitespace_ThrowsArgumentException(string name)
+        public async Task GetCountryInfoByNameAsync_NullEmptyOrWhitespaceName_ThrowsArgumentException(string name)
         {
             CountryDataProcessing processor = new CountryDataProcessing(null);
 
@@ -93,6 +94,45 @@ namespace CountriesService.Tests
             CountryDataProcessing processor = new CountryDataProcessing(apiMock.Object);
 
             _ = await Assert.ThrowsAsync<ArgumentException>(() => processor.GetCountryInfoByNameAsync("invalid"));
+        }
+
+        [Theory]
+        [InlineData("tallin")]
+        [InlineData("lond")]
+        [InlineData("warsaw")]
+        public async Task GetCountryInfoByCapitalAsync_ValidCapital_ReturnsCorrectCountryModel(string capital)
+        {
+            var apiMock = new Mock<IApiRequest>();
+            apiMock.Setup(x => x.GetJsonFromApiAsync(It.IsAny<string>()))
+                .ReturnsAsync(TestData.MockJsonForCountryCapital[capital]);
+            CountryDataProcessing processor = new CountryDataProcessing(apiMock.Object);
+            CountryModel expected = TestData.ExpectedModelsForCountryCapital[capital];
+
+            CountryModel actual = await processor.GetCountryInfoByNameAsync(capital);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("    ")]
+        [InlineData(null)]
+        public async Task GetCountryInfoByCapitalAsync_NullEmptyOrWhitespaceCapital_ThrowsArgumentException(string capital)
+        {
+            CountryDataProcessing processor = new CountryDataProcessing(null);
+
+            _ = await Assert.ThrowsAsync<ArgumentException>(() => processor.GetCountryInfoByNameAsync(capital));
+        }
+
+        [Fact]
+        public async Task GetCountryInfoByCapitalAsync_InvalidCapital_ThrowsArgumentException()
+        {
+            var apiMock = new Mock<IApiRequest>();
+            apiMock.Setup(x => x.GetJsonFromApiAsync(It.IsAny<string>()))
+                .ReturnsAsync(TestData.InvalidRequest);
+            CountryDataProcessing processor = new CountryDataProcessing(apiMock.Object);
+
+            _ = await Assert.ThrowsAsync<ArgumentException>(() => processor.GetCountryInfoByCapitalAsync("invalid"));
         }
     }
 }
