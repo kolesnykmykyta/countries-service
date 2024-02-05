@@ -46,5 +46,22 @@ namespace CountriesService.Models
         /// URL to the image of the country flag.
         /// </summary>
         public string? FlagURL { get; set; }
+
+        /// <summary>
+        /// Method to compare CountryModel to any object.
+        /// </summary>
+        /// <param name="obj">Object to compare with.</param>
+        /// <returns>True if objects are equal, false if they are not equal.</returns>
+        public override bool Equals(object? obj)
+        {
+            CountryModel? other = obj as CountryModel;
+            return other is not null &&
+                other.Name == this.Name &&
+                this.Currency.Equals(other.Currency) &&
+                other.Capital == this.Capital &&
+                other.Region == this.Region &&
+                other.Area == this.Area &&
+                other.FlagURL == this.FlagURL;
+        }
     }
 }
