@@ -63,7 +63,22 @@ namespace CountriesService
 
         public async Task<CountryModel> GetCountryInfoByCapitalAsync(string capitalName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(capitalName))
+            {
+                throw new ArgumentException("Capital name is null, empty or whitespace");
+            }
+
+            try
+            {
+                string request = $"{targetedApi}capital/{capitalName}?fields=name,capital,area,population,flags,currencies,region";
+                string jsonData = await _apirequester.GetJsonFromApiAsync(request);
+                CountryModel output = await ConvertJsonIntoCountryModelAsync(jsonData);
+
+                return output;
+            }
+            catch (JsonException ex){
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         private static async Task<CountryModel> ConvertJsonIntoCountryModelAsync(string json)
